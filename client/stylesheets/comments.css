@@ -1,0 +1,23 @@
+.comment_details {
+    padding-left: 5px;
+    padding-top: 5px;
+    position: relative;
+    overflow: hidden;
+    display: block;
+    /*border-radius: 50%;*/
+}
+.comment-wrapper {
+    overflow: hidden;
+}
+.postmeta {
+    font-size: 12px;
+    margin-bottom: 4px;
+    color: #aaaaaa;
+}
+abbr {
+    font-size: 100%;
+    vertical-align: baseline;
+}
+.comment-main {
+    font-size: 100%;
+}
