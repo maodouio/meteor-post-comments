@@ -1,16 +1,42 @@
 Meteor.publishComposite("userCommentsComposite", function(userId) {
   return {
     find: function() {
-      // 根据用户 Id 查询出该用户所有的评论集合，注意这里是集合
       return Comment.collection.find({userId: userId});
     },
     children: [
       {
         find: function(comment) {
-          // 遍历查询出来的评论集合中所有信息，根据每一条评论关联的文章 Id 查询文章数据
-          console.log("Get activityId by commantId : commandId =", comment._id, " commandLinkObjectId =", comment.linkedObjectId);
-          return Activities.find({_id: comment.linkedObjectId});
-        }
+          if (typeof Activities !== "undefined") {
+            return Activities.find({_id: comment.linkedObjectId});
+          }
+        },
+        children: [
+          {
+            find: function(activity) {
+              if (typeof Like !== "undefined" && typeof Like.collection !== "undefined") {
+                return Like.collection.find({linkedObjectId: activity._id});
+              }
+            }
+          },
+          {
+            find: function(activity) {
+              // Find activity picture
+              return Images.find({_id: activity.picture});
+            }
+          },
+          {
+            find: function(activity) {
+              if (typeof Enrollments !== "undefined") {
+                return Enrollments.find({activityId: activity._id});
+              }
+            }
+          },
+          {
+            find: function(activity) {
+              return Meteor.users.find({_id: activity.userId});
+            }
+          }
+        ]
       }
     ]
   }
