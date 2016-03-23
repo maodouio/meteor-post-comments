@@ -1,5 +1,5 @@
 Package.describe({
-    name: "maodouio:activity-comments",
+    name: "maodouio:post-comments",
     summary: "",
     version: "0.0.2",
     git: ""

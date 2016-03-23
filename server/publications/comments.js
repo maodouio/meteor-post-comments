@@ -6,34 +6,34 @@ Meteor.publishComposite("userCommentsComposite", function(userId) {
     children: [
       {
         find: function(comment) {
-          if (typeof Activities !== "undefined") {
-            return Activities.find({_id: comment.linkedObjectId});
+          if (typeof Posts !== "undefined") {
+            return Posts.find({_id: comment.linkedObjectId});
           }
         },
         children: [
           {
-            find: function(activity) {
+            find: function(post) {
               if (typeof Like !== "undefined" && typeof Like.collection !== "undefined") {
-                return Like.collection.find({linkedObjectId: activity._id});
+                return Like.collection.find({linkedObjectId: post._id});
               }
             }
           },
           {
-            find: function(activity) {
-              // Find activity picture
-              return Images.find({_id: activity.picture});
+            find: function(post) {
+              // Find post picture
+              return Images.find({_id: post.picture});
             }
           },
           {
-            find: function(activity) {
+            find: function(post) {
               if (typeof Enrollments !== "undefined") {
-                return Enrollments.find({activityId: activity._id});
+                return Enrollments.find({postId: post._id});
               }
             }
           },
           {
-            find: function(activity) {
-              return Meteor.users.find({_id: activity.userId});
+            find: function(post) {
+              return Meteor.users.find({_id: post.userId});
             }
           }
         ]

@@ -1,6 +1,6 @@
 
 Meteor.startup(function () {
-  console.log("Package activity-comments startup...");
-  console.log("Session.set('hasPackageActivityComments', true);");
-  Session.set('hasPackageActivityComments', true);
+  console.log("Package post-comments startup...");
+  console.log("Session.set('hasPackagePostComments', true);");
+  Session.set('hasPackagePostComments', true);
 });
