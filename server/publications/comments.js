@@ -1,4 +1,4 @@
-Meteor.publishComposite("userCommentsComposite", function(userId) {
+Meteor.publishComposite("userPostCommentsComposite", function(userId) {
   return {
     find: function() {
       return Comment.collection.find({userId: userId});
